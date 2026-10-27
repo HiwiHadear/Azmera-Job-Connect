@@ -134,11 +134,11 @@ function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle: string }) {
     return path;
   }
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>): Promise<unknown> {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse(Object.fromEntries(fd));
-    if (!parsed.success) return toast.error(parsed.error.issues[0].message);
+    if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
     const cv = fd.get("cv") as File | null;
     if (!cv || !cv.size) return toast.error("Please attach your CV / résumé");
     const docs = (fd.getAll("docs") as File[]).filter((f) => f.size);

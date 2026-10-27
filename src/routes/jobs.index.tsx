@@ -132,7 +132,7 @@ function Group({ title, children }: { title: string; children: React.ReactNode }
   return <div className="space-y-2"><h3 className="font-semibold">{title}</h3>{children}</div>;
 }
 
-function Checks({ title, options, value = [], onToggle }: { title: string; options: string[]; value?: string[]; onToggle: (v: string) => void }) {
+function Checks({ title, options, value = [], onToggle }: { title: string; options: string[]; value?: string[] | undefined; onToggle: (v: string) => void }) {
   return (
     <Group title={title}>
       <div className="grid grid-cols-2 gap-2">

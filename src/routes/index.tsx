@@ -35,7 +35,7 @@ function Home() {
     open.reduce<Record<string, { id: string; name: string; logo: string | null; count: number }>>((acc, j) => {
       if (!j.companies) return acc;
       acc[j.company_id] ??= { id: j.company_id, name: j.companies.name, logo: j.companies.logo_url, count: 0 };
-      acc[j.company_id].count++;
+      acc[j.company_id]!.count++;
       return acc;
     }, {}),
   ).sort((a, b) => b.count - a.count);
