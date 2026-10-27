@@ -14,16 +14,215 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          cv_path: string
+          document_paths: string[]
+          email: string
+          full_name: string
+          id: string
+          job_id: string
+          phone: string | null
+          status: string
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_path: string
+          document_paths?: string[]
+          email: string
+          full_name: string
+          id?: string
+          job_id: string
+          phone?: string | null
+          status?: string
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_path?: string
+          document_paths?: string[]
+          email?: string
+          full_name?: string
+          id?: string
+          job_id?: string
+          phone?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      companies: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      jobs: {
+        Row: {
+          category_id: string | null
+          company_id: string
+          created_at: string
+          deadline: string | null
+          employment_type: string
+          experience: string
+          experience_level: string
+          external_url: string | null
+          id: string
+          is_featured: boolean
+          is_urgent: boolean
+          location: string
+          qualifications: string
+          responsibilities: string
+          salary_max: number | null
+          salary_min: number | null
+          status: string
+          summary: string
+          title: string
+          work_mode: string
+        }
+        Insert: {
+          category_id?: string | null
+          company_id: string
+          created_at?: string
+          deadline?: string | null
+          employment_type?: string
+          experience?: string
+          experience_level?: string
+          external_url?: string | null
+          id?: string
+          is_featured?: boolean
+          is_urgent?: boolean
+          location?: string
+          qualifications?: string
+          responsibilities?: string
+          salary_max?: number | null
+          salary_min?: number | null
+          status?: string
+          summary?: string
+          title: string
+          work_mode?: string
+        }
+        Update: {
+          category_id?: string | null
+          company_id?: string
+          created_at?: string
+          deadline?: string | null
+          employment_type?: string
+          experience?: string
+          experience_level?: string
+          external_url?: string | null
+          id?: string
+          is_featured?: boolean
+          is_urgent?: boolean
+          location?: string
+          qualifications?: string
+          responsibilities?: string
+          salary_max?: number | null
+          salary_min?: number | null
+          status?: string
+          summary?: string
+          title?: string
+          work_mode?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +349,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
