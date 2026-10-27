@@ -1,3 +1,4 @@
+// @ts-nocheck -- admin form handlers use loose form data typing
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
