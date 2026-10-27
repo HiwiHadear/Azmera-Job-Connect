@@ -134,15 +134,15 @@ function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle: string }) {
     return path;
   }
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>): Promise<unknown> {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse(Object.fromEntries(fd));
-    if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Invalid input"); return; }
     const cv = fd.get("cv") as File | null;
-    if (!cv || !cv.size) return toast.error("Please attach your CV / résumé");
+    if (!cv || !cv.size) { toast.error("Please attach your CV / résumé"); return; }
     const docs = (fd.getAll("docs") as File[]).filter((f) => f.size);
-    if (docs.length > 5) return toast.error("Up to 5 supporting documents");
+    if (docs.length > 5) { toast.error("Up to 5 supporting documents"); return; }
 
     setSubmitting(true);
     try {
