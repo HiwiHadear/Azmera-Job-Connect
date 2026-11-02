@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CvMatchRouteImport } from './routes/cv-match'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ApiCvMatchRouteImport } from './routes/api/cv-match'
 import { Route as JobsIndexRouteImport } from './routes/jobs.index'
@@ -29,6 +30,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvMatchRoute = CvMatchRouteImport.update({
+  id: '/cv-match',
+  path: '/cv-match',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -55,6 +61,7 @@ const JobsIdRoute = JobsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/cv-match': typeof CvMatchRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/cv-match': typeof ApiCvMatchRoute
   '/jobs/$id': typeof JobsIdRoute
@@ -63,6 +70,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/cv-match': typeof CvMatchRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/cv-match': typeof ApiCvMatchRoute
   '/jobs/$id': typeof JobsIdRoute
@@ -73,6 +81,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/cv-match': typeof CvMatchRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/cv-match': typeof ApiCvMatchRoute
   '/jobs/$id': typeof JobsIdRoute
@@ -80,14 +89,29 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin' | '/api/cv-match' | '/jobs/$id' | '/jobs/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/cv-match'
+    | '/admin'
+    | '/api/cv-match'
+    | '/jobs/$id'
+    | '/jobs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin' | '/api/cv-match' | '/jobs/$id' | '/jobs'
+  to:
+    | '/'
+    | '/auth'
+    | '/cv-match'
+    | '/admin'
+    | '/api/cv-match'
+    | '/jobs/$id'
+    | '/jobs'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/cv-match'
     | '/_authenticated/admin'
     | '/api/cv-match'
     | '/jobs/$id'
@@ -98,6 +122,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  CvMatchRoute: typeof CvMatchRoute
   ApiCvMatchRoute: typeof ApiCvMatchRoute
   JobsIdRoute: typeof JobsIdRoute
   JobsIndexRoute: typeof JobsIndexRoute
@@ -124,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv-match': {
+      id: '/cv-match'
+      path: '/cv-match'
+      fullPath: '/cv-match'
+      preLoaderRoute: typeof CvMatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -172,6 +204,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  CvMatchRoute: CvMatchRoute,
   ApiCvMatchRoute: ApiCvMatchRoute,
   JobsIdRoute: JobsIdRoute,
   JobsIndexRoute: JobsIndexRoute,
