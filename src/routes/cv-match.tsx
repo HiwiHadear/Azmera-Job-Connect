@@ -13,7 +13,7 @@ import { fetchJobs, isExpired } from "@/lib/jobs";
 import { matchInputSchema, readMatchStream, validateCVFile } from "@/lib/cv-match";
 
 export const Route = createFileRoute("/cv-match")({
-  validateSearch: (search: Record<string, unknown>): { jobId?: string } => ({ jobId: typeof search["jobId"] === "string" ? search["jobId"] : undefined }),
+  validateSearch: (search: Record<string, unknown>): { jobId?: string } => typeof search["jobId"] === "string" ? { jobId: search["jobId"] } : {},
   head: () => ({ meta: [
     { title: "CV Match — Azmera Jobs" },
     { name: "description", content: "Compare your CV with a job listing to find matching skills and tailored application improvements." },
@@ -132,7 +132,7 @@ function CVMatch() {
         </fieldset>
         <p className="text-xs leading-relaxed text-muted-foreground">Your CV and listing are sent to Lovable AI for analysis. They aren’t saved to your Azmera account. Remove sensitive personal details before submitting.</p>
         {error && <div role="alert" className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive"><AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /><span className="break-words">{error}</span></div>}
-        {busy ? <Button type="button" variant="outline" className="w-full" onClick={() => abort.current?.abort()}><Square className="h-4 w-4" /> Stop analysis</Button> : <Button type="submit" size="lg" className="w-full"><Sparkles className="h-4 w-4" /> {report ? "Analyze again" : "Analyze my match"}</Button>}
+        {busy ? <Button type="button" variant="outline" className="w-full" onClick={() => { abort.current?.abort(); setState("stopped"); }}><Square className="h-4 w-4" /> Stop analysis</Button> : <Button type="submit" size="lg" className="w-full"><Sparkles className="h-4 w-4" /> {report ? "Analyze again" : "Analyze my match"}</Button>}
       </form>
       <section aria-label="Application review" aria-live="polite" className="min-w-0 border-t pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
