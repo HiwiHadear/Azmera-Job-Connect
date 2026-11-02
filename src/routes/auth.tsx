@@ -5,13 +5,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Employer sign in — Jobify" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Employer sign in — Azmera Jobs" },
       { name: "description", content: "Sign in to manage vacancies and review applications." },
-      { property: "og:title", content: "Employer sign in — Jobify" },
+      { property: "og:title", content: "Employer sign in — Azmera Jobs" },
       { property: "og:description", content: "Sign in to manage vacancies and review applications." },
     ],
   }),
@@ -44,6 +47,7 @@ function AuthPage() {
 
   return (
     <main className="mx-auto max-w-md px-4 py-16">
+      <BrandLogo full className="mb-6" />
       <form onSubmit={submit} className="space-y-4 rounded-2xl border bg-card p-6">
         <h1 className="text-2xl font-bold">{mode === "in" ? "Admin sign in" : "Create admin account"}</h1>
         <p className="text-sm text-muted-foreground">The first account created becomes the site administrator.</p>

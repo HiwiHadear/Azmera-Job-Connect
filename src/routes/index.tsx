@@ -10,9 +10,11 @@ import { fetchJobs, fetchCategories, isExpired } from "@/lib/jobs";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Jobify — Find your dream job" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Azmera Jobs — Find your dream job" },
       { name: "description", content: "Search featured, latest and urgent vacancies from top employers and apply online." },
-      { property: "og:title", content: "Jobify — Find your dream job" },
+      { property: "og:title", content: "Azmera Jobs — Find your dream job" },
       { property: "og:description", content: "Search featured, latest and urgent vacancies and apply online." },
     ],
   }),
@@ -35,7 +37,8 @@ function Home() {
     open.reduce<Record<string, { id: string; name: string; logo: string | null; count: number }>>((acc, j) => {
       if (!j.companies) return acc;
       acc[j.company_id] ??= { id: j.company_id, name: j.companies.name, logo: j.companies.logo_url, count: 0 };
-      acc[j.company_id]!.count++;
+      const employer = acc[j.company_id];
+      if (employer) employer.count++;
       return acc;
     }, {}),
   ).sort((a, b) => b.count - a.count);
@@ -48,7 +51,7 @@ function Home() {
             {open.length} open positions
           </p>
           <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">
-            Find your <span className="text-primary">dream job</span> here
+            Find your <span className="text-primary underline decoration-brand-gold decoration-4 underline-offset-8">dream job</span> here
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Explore the newest opportunities from top employers and apply in minutes.
@@ -119,7 +122,7 @@ function Home() {
           </div>
         </Section>
       </div>
-      <footer className="border-t py-8 text-center text-sm text-muted-foreground">© {new Date().getFullYear()} Jobify</footer>
+      <footer className="border-t py-8 text-center text-sm text-muted-foreground">© {new Date().getFullYear()} Azmera Jobs</footer>
     </main>
   );
 }

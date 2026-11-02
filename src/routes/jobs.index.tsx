@@ -26,9 +26,11 @@ export const Route = createFileRoute("/jobs/")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Find Jobs — Jobify" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Find Jobs — Azmera Jobs" },
       { name: "description", content: "Filter jobs by location, category, salary and employment type." },
-      { property: "og:title", content: "Find Jobs — Jobify" },
+      { property: "og:title", content: "Find Jobs — Azmera Jobs" },
       { property: "og:description", content: "Filter jobs by location, category, salary and employment type." },
     ],
   }),
