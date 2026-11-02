@@ -19,13 +19,14 @@ export function SiteHeader() {
         <Link to="/" aria-label="Azmera Jobs home" className="flex items-center">
           <BrandLogo />
         </Link>
-        <nav className="flex items-center gap-3 sm:gap-6">
+        <nav className="flex flex-wrap items-center gap-3 sm:gap-6">
           <Link to="/" className={link} activeProps={active} activeOptions={{ exact: true }}>
             Home
           </Link>
           <Link to="/jobs" className={link} activeProps={active}>
             Find Jobs
           </Link>
+          <Link to="/cv-match" className={link} activeProps={active}>CV Match</Link>
           <Link to="/admin" className={link} activeProps={active}>
             {signedIn ? "Dashboard" : "Employers"}
           </Link>

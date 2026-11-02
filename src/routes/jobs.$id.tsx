@@ -75,6 +75,7 @@ function JobDetail() {
       </div>
 
       <aside className="h-fit lg:sticky lg:top-6 lg:mt-10">
+        <Button asChild variant="outline" className="mb-4 w-full"><Link to="/cv-match" search={{ jobId: job.id }}>Match my CV to this job</Link></Button>
         {expired ? (
           <div className="rounded-2xl border bg-card p-6 text-center text-muted-foreground">Applications for this job are closed.</div>
         ) : job.external_url ? (
