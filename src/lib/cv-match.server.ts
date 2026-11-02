@@ -93,7 +93,10 @@ export async function handleCVMatch(request: Request): Promise<Response> {
       },
       async cancel() { await iterator.return?.(); },
     });
-    return new Response(body, { headers: { "Content-Type": "application/x-ndjson", "Cache-Control": "no-cache, no-store, no-transform" } });
+    const headers = new Headers({ "Content-Type": "application/x-ndjson", "Cache-Control": "no-cache, no-store, no-transform" });
+    const runId = call.getRunId();
+    if (runId) headers.set("X-Lovable-AIG-Run-ID", runId);
+    return new Response(body, { headers });
   } catch (error) {
     if (request.signal.aborted) return errorResponse("Analysis stopped.", 499);
     return errorResponse(error instanceof Error && /CV|PDF|TXT|file/i.test(error.message) ? error.message : "AI analysis could not start. Please try again later.", 400);

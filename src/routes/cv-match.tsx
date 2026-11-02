@@ -13,7 +13,7 @@ import { fetchJobs, isExpired } from "@/lib/jobs";
 import { matchInputSchema, readMatchStream, validateCVFile } from "@/lib/cv-match";
 
 export const Route = createFileRoute("/cv-match")({
-  validateSearch: (search: Record<string, unknown>) => ({ jobId: typeof search.jobId === "string" ? search.jobId : undefined }),
+  validateSearch: (search: Record<string, unknown>): { jobId?: string } => ({ jobId: typeof search["jobId"] === "string" ? search["jobId"] : undefined }),
   head: () => ({ meta: [
     { title: "CV Match — Azmera Jobs" },
     { name: "description", content: "Compare your CV with a job listing to find matching skills and tailored application improvements." },
