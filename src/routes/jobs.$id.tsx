@@ -16,9 +16,11 @@ import { fetchJob, formatSalary, isExpired, lines, timeAgo } from "@/lib/jobs";
 export const Route = createFileRoute("/jobs/$id")({
   head: () => ({
     meta: [
-      { title: "Job details — Jobify" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Job details — Azmera Jobs" },
       { name: "description", content: "View job responsibilities, qualifications and apply online." },
-      { property: "og:title", content: "Job details — Jobify" },
+      { property: "og:title", content: "Job details — Azmera Jobs" },
       { property: "og:description", content: "View job responsibilities, qualifications and apply online." },
     ],
   }),

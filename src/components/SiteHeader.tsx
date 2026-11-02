@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Zap } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -15,14 +15,11 @@ export function SiteHeader() {
   const active = { className: "text-sm font-semibold text-primary" };
   return (
     <header className="border-b bg-card">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2 text-xl font-bold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <Zap className="h-4 w-4" />
-          </span>
-          Jobify
+      <div className="mx-auto flex min-h-20 max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+        <Link to="/" aria-label="Azmera Jobs home" className="flex items-center">
+          <BrandLogo />
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-3 sm:gap-6">
           <Link to="/" className={link} activeProps={active} activeOptions={{ exact: true }}>
             Home
           </Link>

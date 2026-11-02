@@ -17,9 +17,11 @@ import { fetchJobs, fetchCategories, fetchCompanies, EMPLOYMENT_TYPES, WORK_MODE
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
-      { title: "Admin dashboard — Jobify" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Admin dashboard — Azmera Jobs" },
       { name: "description", content: "Manage vacancies, companies, categories and applications." },
-      { property: "og:title", content: "Admin dashboard — Jobify" },
+      { property: "og:title", content: "Admin dashboard — Azmera Jobs" },
       { property: "og:description", content: "Manage vacancies, companies, categories and applications." },
     ],
   }),
