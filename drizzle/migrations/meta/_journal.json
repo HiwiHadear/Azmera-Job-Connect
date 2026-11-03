@@ -15,6 +15,13 @@
       "when": 1793598812957,
       "tag": "0001_ai_cv_match_access_state",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793685349387,
+      "tag": "0002_employer_profiles_and_owned_vacancies",
+      "breakpoints": true
     }
   ]
 }
