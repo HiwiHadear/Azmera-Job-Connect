@@ -24,7 +24,12 @@ export const saveEmployerProfile = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => employerProfileSchema.parse(input))
   .handler(async ({ data, context }) => {
     const { contact_name, ...company } = data;
-    const result = await context.supabase.from("companies").upsert({ ...company, website: company.website || null, owner_id: context.userId }, { onConflict: "owner_id" });
+    const existing = await context.supabase.from("companies").select("id").eq("owner_id", context.userId).maybeSingle();
+    if (existing.error) throw new Error("Could not load company profile");
+    const values = { ...company, website: company.website || null, owner_id: context.userId };
+    const result = existing.data
+      ? await context.supabase.from("companies").update(values).eq("id", existing.data.id).eq("owner_id", context.userId)
+      : await context.supabase.from("companies").insert(values);
     if (result.error) throw new Error("Could not save company profile");
     const profile = await context.supabase.from("profiles").upsert({ id: context.userId, contact_name });
     if (profile.error) throw new Error("Could not save contact name");
