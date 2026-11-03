@@ -107,6 +107,7 @@ export type Database = {
           id: string
           logo_url: string | null
           name: string
+          owner_id: string | null
           website: string | null
         }
         Insert: {
@@ -115,6 +116,7 @@ export type Database = {
           id?: string
           logo_url?: string | null
           name: string
+          owner_id?: string | null
           website?: string | null
         }
         Update: {
@@ -123,6 +125,7 @@ export type Database = {
           id?: string
           logo_url?: string | null
           name?: string
+          owner_id?: string | null
           website?: string | null
         }
         Relationships: []
@@ -210,6 +213,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      profiles: {
+        Row: {
+          contact_name: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          contact_name?: string
+          created_at?: string
+          id: string
+        }
+        Update: {
+          contact_name?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
