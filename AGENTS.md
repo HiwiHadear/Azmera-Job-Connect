@@ -11,3 +11,4 @@
 
 - Render site branding through the shared BrandLogo component and CDN asset pointers; derive the favicon from the same supplied logo to keep identity consistent.
 - CV matching uses a streaming TanStack server route and server-only AI Gateway helpers; CVs and results are not persisted, and terminal provider access blocks are persisted in a service-only table to prevent automatic replay.
+- Employer CRUD uses authenticated server functions and company-owner RLS; contact names stay in private profiles, and employer vacancies reuse jobs/external_url so public search and CV Match share the same listings.
