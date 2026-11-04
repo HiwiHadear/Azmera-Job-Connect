@@ -4,6 +4,10 @@
 - [x] Verify validation, live analysis, and desktop/mobile layout.
 
 # Employer workspace
-- [ ] Add company and contact profiles with owner-only vacancy management.
-- [ ] Add employer sign-in navigation and vacancy forms with external applications.
+- [x] Add company and contact profiles with owner-only vacancy management.
+- [x] Add employer sign-in navigation and vacancy forms with external applications.
 - [ ] Verify profile, vacancy publication, CV Match selection and access isolation.
+
+# More jobs and employer images
+- [ ] Add more clearly identified sample jobs and employers.
+- [ ] Add employer logo images and verify they appear on jobs.
