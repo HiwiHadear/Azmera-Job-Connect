@@ -49,7 +49,7 @@ function EmployerPage() {
   async function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const parsed = employerProfileSchema.safeParse(Object.fromEntries(new FormData(e.currentTarget)));
-    if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Check your profile details");
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Check your profile details"); return; }
     setBusy(true);
     try { await saveProfile({ data: parsed.data }); await refresh(); toast.success("Employer profile saved"); setTab("vacancies"); }
     catch (err) { toast.error(err instanceof Error ? err.message : "Could not save profile"); }
@@ -107,7 +107,7 @@ function VacancyDialog({ job, categories, onClose, onSaved }: { job: Partial<Vac
     e.preventDefault();
     const values = Object.fromEntries(new FormData(e.currentTarget));
     const parsed = employerVacancySchema.safeParse({ ...values, ...(job.id ? { id: job.id } : {}) });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Check the vacancy details");
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Check the vacancy details"); return; }
     setBusy(true);
     try { await save({ data: { ...values, ...(job.id ? { id: job.id } : {}) } }); toast.success(parsed.data.status === "published" ? "Vacancy published" : "Vacancy saved"); await onSaved(); }
     catch (err) { toast.error(err instanceof Error ? err.message : "Could not save vacancy"); }
