@@ -127,7 +127,7 @@ function CVMatch() {
             <Label htmlFor="target-job">Azmera listing (optional)</Label>
             <Select value={selectedJob || "custom"} onValueChange={value => selectJob(value === "custom" ? "" : value)} disabled={busy}>
               <SelectTrigger id="target-job" className="h-auto min-h-14 min-w-0 bg-card py-2 text-left">
-                {selectedListing ? <span className="flex min-w-0 items-center gap-3"><CompanyLogo name={selectedListing.companies?.name ?? "Employer"} url={selectedListing.companies?.logo_url} className="h-10 w-10 rounded-md" /><span className="min-w-0 whitespace-normal"><span className="block break-words font-semibold">{selectedListing.title}</span><span className="block text-xs text-muted-foreground">{selectedListing.companies?.name} · {selectedListing.location}</span></span></span> : <span className="whitespace-normal">Choose a listing or paste one below</span>}
+                {selectedListing ? <div className="flex min-w-0 items-center gap-3"><CompanyLogo name={selectedListing.companies?.name ?? "Employer"} url={selectedListing.companies?.logo_url} className="h-10 w-10 rounded-md" /><span className="min-w-0 whitespace-normal"><span className="block break-words font-semibold">{selectedListing.title}</span><span className="block text-xs text-muted-foreground">{selectedListing.companies?.name} · {selectedListing.location}</span></span></div> : <span className="whitespace-normal">Choose a listing or paste one below</span>}
               </SelectTrigger>
               <SelectContent className="max-w-[calc(100vw-2rem)]">
                 <SelectItem value="custom">Paste my own listing</SelectItem>
