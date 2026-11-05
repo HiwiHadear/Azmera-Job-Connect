@@ -11,3 +11,8 @@
 # More jobs and employer images
 - [x] Add twelve clearly identified sample jobs and three sample employers.
 - [x] Add eight employer logo images and verify jobs and narrow-screen layouts.
+
+# Ethiopia and visible logos
+- [ ] Correct sample vacancies to Ethiopian locations.
+- [ ] Reproduce and resolve missing employer logos, including CV Match.
+- [ ] Verify location data and visible images.
