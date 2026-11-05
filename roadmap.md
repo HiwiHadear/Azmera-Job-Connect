@@ -13,6 +13,6 @@
 - [x] Add eight employer logo images and verify jobs and narrow-screen layouts.
 
 # Ethiopia and visible logos
-- [ ] Correct sample vacancies to Ethiopian locations.
-- [ ] Reproduce and resolve missing employer logos, including CV Match.
-- [ ] Verify location data and visible images.
+- [x] Correct sample vacancies to Ethiopian locations.
+- [x] Reproduce missing CV Match logos and add image-based listing selection.
+- [x] Verify location data and visible images on CV Match and jobs.
