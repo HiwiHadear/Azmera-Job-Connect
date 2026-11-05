@@ -9,6 +9,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CompanyLogo } from "@/components/CompanyLogo";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { fetchJobs, isExpired } from "@/lib/jobs";
 import { matchInputSchema, readMatchStream, validateCVFile } from "@/lib/cv-match";
 
@@ -40,6 +42,7 @@ function CVMatch() {
   const abort = useRef<AbortController | null>(null);
   const { data: jobs = [], isError: jobsError } = useQuery({ queryKey: ["jobs"], queryFn: fetchJobs });
   const openJobs = jobs.filter(j => j.status === "published" && !isExpired(j.deadline));
+  const selectedListing = openJobs.find(j => j.id === selectedJob);
 
   function selectJob(id: string) {
     setSelectedJob(id);
@@ -122,10 +125,15 @@ function CVMatch() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold">Target job</h2>
             <Label htmlFor="target-job">Azmera listing (optional)</Label>
-            <select id="target-job" value={selectedJob} onChange={e => selectJob(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input bg-card px-3 text-sm">
-              <option value="">Choose a listing or paste one below</option>
-              {openJobs.map(j => <option value={j.id} key={j.id}>{j.title} — {j.companies?.name}</option>)}
-            </select>
+            <Select value={selectedJob || "custom"} onValueChange={value => selectJob(value === "custom" ? "" : value)} disabled={busy}>
+              <SelectTrigger id="target-job" className="h-auto min-h-14 min-w-0 bg-card py-2 text-left">
+                {selectedListing ? <div className="flex min-w-0 items-center gap-3"><CompanyLogo name={selectedListing.companies?.name ?? "Employer"} url={selectedListing.companies?.logo_url} className="h-10 w-10 rounded-md" /><span className="min-w-0 whitespace-normal"><span className="block break-words font-semibold">{selectedListing.title}</span><span className="block text-xs text-muted-foreground">{selectedListing.companies?.name} · {selectedListing.location}</span></span></div> : <span className="whitespace-normal">Choose a listing or paste one below</span>}
+              </SelectTrigger>
+              <SelectContent className="max-w-[calc(100vw-2rem)]">
+                <SelectItem value="custom">Paste my own listing</SelectItem>
+                {openJobs.map(j => <SelectItem value={j.id} key={j.id}><span className="flex items-center gap-3"><CompanyLogo name={j.companies?.name ?? "Employer"} url={j.companies?.logo_url} className="h-10 w-10 rounded-md" /><span className="min-w-0 whitespace-normal"><span className="block break-words font-semibold">{j.title}</span><span className="block text-xs text-muted-foreground">{j.companies?.name} · {j.location}</span></span></span></SelectItem>)}
+              </SelectContent>
+            </Select>
             {jobsError && <p className="text-xs text-muted-foreground">Listings are unavailable. You can still paste a job below.</p>}
             <Label htmlFor="job-text">Job listing</Label>
             <Textarea id="job-text" value={job} onChange={e => { setJob(e.target.value); }} rows={9} maxLength={30000} placeholder="Job title, responsibilities and required skills…" />
