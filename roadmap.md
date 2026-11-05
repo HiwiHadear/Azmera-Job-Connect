@@ -6,8 +6,8 @@
 # Employer workspace
 - [x] Add company and contact profiles with owner-only vacancy management.
 - [x] Add employer sign-in navigation and vacancy forms with external applications.
-- [ ] Verify profile, vacancy publication, CV Match selection and access isolation.
+- [x] Verify profile creation, draft read-back, publication, external applications, CV Match prefill and signed-out protection; inspect owner-scoped policies.
 
 # More jobs and employer images
-- [ ] Add more clearly identified sample jobs and employers.
-- [ ] Add employer logo images and verify they appear on jobs.
+- [x] Add twelve clearly identified sample jobs and three sample employers.
+- [x] Add eight employer logo images and verify jobs and narrow-screen layouts.

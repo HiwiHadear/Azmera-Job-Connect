@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export function CompanyLogo({
   name,
@@ -9,6 +10,7 @@ export function CompanyLogo({
   url?: string | null | undefined;
   className?: string | undefined;
 }) {
+  const [failedUrl, setFailedUrl] = useState<string | null>(null);
   const initials = name
     .split(" ")
     .map((w) => w[0])
@@ -22,7 +24,7 @@ export function CompanyLogo({
         className,
       )}
     >
-      {url ? <img src={url} alt={name} className="h-full w-full object-cover" /> : initials}
+      {url && failedUrl !== url ? <img src={url} alt={name} loading="lazy" width={64} height={64} onError={() => setFailedUrl(url)} className="h-full w-full bg-card object-contain" /> : initials}
     </div>
   );
 }
