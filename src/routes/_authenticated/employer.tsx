@@ -78,6 +78,7 @@ function EmployerPage() {
           <Field label="Company name" name="name"><Input id="name" name="name" required maxLength={160} defaultValue={data.company?.name} /></Field>
           <Field label="Contact person" name="contact_name"><Input id="contact_name" name="contact_name" required maxLength={120} defaultValue={data.profile?.contact_name} /></Field>
           <Field label="Company website" name="website" full><Input id="website" name="website" type="url" maxLength={2048} defaultValue={data.company?.website ?? ""} placeholder="https://" /></Field>
+          <Field label="Company logo link" name="logo_url" full><Input id="logo_url" name="logo_url" type="url" maxLength={2048} defaultValue={data.company?.logo_url ?? ""} placeholder="https://…/your-logo.png" /><p className="text-xs text-muted-foreground">Link to your official company logo image. Leave empty to show your company initials.</p></Field>
           <Field label="About your company" name="description" full><Textarea id="description" name="description" rows={5} maxLength={3000} defaultValue={data.company?.description ?? ""} /></Field>
           <div className="sm:col-span-2"><Button type="submit" disabled={busy}><Save className="h-4 w-4" />{busy ? "Saving…" : "Save profile"}</Button></div>
         </form>
