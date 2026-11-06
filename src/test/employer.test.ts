@@ -4,8 +4,12 @@ import { employerProfileSchema, employerVacancySchema, webLink } from "@/lib/emp
 const vacancy = { title: "Software engineer", category_id: "", location: "Nairobi", employment_type: "Full-Time", work_mode: "Hybrid", experience_level: "Intermediate", salary_min: "", salary_max: "", deadline: "", summary: "Build web applications", responsibilities: "Develop software", qualifications: "TypeScript", experience: "Two years", external_url: "https://example.org/apply", status: "published" };
 describe("Employer requirements", () => {
   it("stores company and contact person independently", () => {
-    expect(employerProfileSchema.parse({ name: "Acme", contact_name: "Jane Doe", website: "", description: "Hiring engineers" })).toMatchObject({ name: "Acme", contact_name: "Jane Doe" });
-    expect(employerProfileSchema.safeParse({ name: "Acme", contact_name: "", website: "", description: "" }).success).toBe(false);
+    expect(employerProfileSchema.parse({ name: "Acme", contact_name: "Jane Doe", website: "", logo_url: "", description: "Hiring engineers" })).toMatchObject({ name: "Acme", contact_name: "Jane Doe" });
+    expect(employerProfileSchema.safeParse({ name: "Acme", contact_name: "", website: "", logo_url: "", description: "" }).success).toBe(false);
+  });
+  it("accepts the employer's own logo link and rejects unsafe ones", () => {
+    expect(employerProfileSchema.safeParse({ name: "Acme", contact_name: "Jane", website: "", logo_url: "https://example.org/logo.png", description: "" }).success).toBe(true);
+    expect(employerProfileSchema.safeParse({ name: "Acme", contact_name: "Jane", website: "", logo_url: "javascript:alert(1)", description: "" }).success).toBe(false);
   });
   it("requires the employer application form link", () => {
     expect(employerVacancySchema.parse(vacancy).external_url).toBe("https://example.org/apply");
