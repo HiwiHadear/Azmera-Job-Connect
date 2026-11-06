@@ -26,7 +26,7 @@ export const saveEmployerProfile = createServerFn({ method: "POST" })
     const { contact_name, ...company } = data;
     const existing = await context.supabase.from("companies").select("id").eq("owner_id", context.userId).maybeSingle();
     if (existing.error) throw new Error("Could not load company profile");
-    const values = { ...company, website: company.website || null, owner_id: context.userId };
+    const values = { ...company, website: company.website || null, logo_url: company.logo_url || null, owner_id: context.userId };
     const result = existing.data
       ? await context.supabase.from("companies").update(values).eq("id", existing.data.id).eq("owner_id", context.userId)
       : await context.supabase.from("companies").insert(values);

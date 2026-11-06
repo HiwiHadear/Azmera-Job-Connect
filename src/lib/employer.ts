@@ -10,6 +10,7 @@ export const employerProfileSchema = z.object({
   contact_name: z.string().trim().min(1, "Contact name is required").max(120),
   name: z.string().trim().min(1, "Company name is required").max(160),
   website: z.union([z.literal(""), webLink]),
+  logo_url: z.union([z.literal(""), webLink]),
   description: z.string().trim().max(3000),
 });
 
