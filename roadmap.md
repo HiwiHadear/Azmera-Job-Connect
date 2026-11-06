@@ -16,3 +16,6 @@
 - [x] Correct sample vacancies to Ethiopian locations.
 - [x] Reproduce missing CV Match logos and add image-based listing selection.
 - [x] Verify location data and visible images on CV Match and jobs.
+# Real company logos
+- [x] Replace AI-generated sample logos with employer-provided logo links; show initials when none.
+- [x] Add logo link field to employer profile with validation and tests.
