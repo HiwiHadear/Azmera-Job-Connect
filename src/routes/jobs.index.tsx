@@ -88,9 +88,9 @@ function JobsPage() {
           </select>
         </Group>
         <Group title="Minimum salary">
-          <input type="range" min={0} max={150000} step={10000} value={s.minSalary ?? 0}
+          <input type="range" min={0} max={200000} step={5000} value={s.minSalary ?? 0}
             onChange={(e) => set({ minSalary: Number(e.target.value) || undefined })} className="w-full accent-primary" />
-          <p className="text-sm text-muted-foreground">${Math.round((s.minSalary ?? 0) / 1000)}k / year +</p>
+          <p className="text-sm text-muted-foreground">ETB {(s.minSalary ?? 0).toLocaleString("en-US")} / month +</p>
         </Group>
         <Checks title="Job Type" options={EMPLOYMENT_TYPES} value={s.types} onToggle={(v) => toggle("types", v)} />
         <Checks title="Work Location" options={WORK_MODES} value={s.modes} onToggle={(v) => toggle("modes", v)} />

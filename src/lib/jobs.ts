@@ -59,11 +59,11 @@ export async function fetchCompanies() {
 }
 
 export function formatSalary(min: number | null, max: number | null) {
-  const k = (n: number) => `$${Math.round(n / 1000)}k`;
-  if (min && max) return `${k(min)} – ${k(max)}`;
-  if (max) return `Up to ${k(max)}`;
-  if (min) return `From ${k(min)}`;
-  return "Negotiable";
+  const k = (n: number) => n.toLocaleString("en-US");
+  if (min && max) return `ETB ${k(min)} – ${k(max)} / month`;
+  if (max) return `Up to ETB ${k(max)} / month`;
+  if (min) return `From ETB ${k(min)} / month`;
+  return "Not disclosed by employer";
 }
 
 export function timeAgo(iso: string) {
